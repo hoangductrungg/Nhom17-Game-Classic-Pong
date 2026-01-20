@@ -252,4 +252,13 @@ class GameView(ttk.Frame):
         elif k in ("s", "down"):
             self.on_input_change("DOWN", 1)
 
-
+    def _on_key_release(self, event):
+        if not self._control_enabled:
+            return
+        k = event.keysym.lower()
+        if k in self._keys_down:
+            self._keys_down.remove(k)
+        if k in ("w", "up"):
+            self.on_input_change("UP", 0)
+        elif k in ("s", "down"):
+            self.on_input_change("DOWN", 0)
